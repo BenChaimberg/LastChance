@@ -13,10 +13,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+        application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes:[.Alert,.Sound], categories: nil))
         return true
+    }
+
+    func application(application: UIApplication, didRegisterUserNotificationSettings notificationSettings: UIUserNotificationSettings) {
+        if notificationSettings != UIUserNotificationSettings(forTypes:[.Alert,.Sound], categories: nil) {
+            let alertController = UIAlertController.init(title:"Enable Notifications", message:"LastChance is unable to function as an alarm if it is unable to set notifications. Please enable notifications for LastChance in Settings!", preferredStyle:.Alert)
+            let toSettings = UIAlertAction.init(title: "Go to Settings", style: .Default, handler: { (UIAlertAction) -> Void in
+                let settingsString = UIApplicationOpenSettingsURLString
+                let settingsURL = NSURL.init(string: settingsString)
+                application.openURL(settingsURL!)
+            })
+            let cancelToSettings = UIAlertAction.init(title: "Cancel", style: .Cancel, handler: nil)
+            alertController.addAction(toSettings)
+            alertController.addAction(cancelToSettings)
+            alertController.preferredAction = toSettings
+            let navigationController = application.windows[0].rootViewController as! UINavigationController
+            let activeViewController = navigationController.visibleViewController!
+            activeViewController.presentViewController(alertController, animated: true, completion: nil)
+        }
     }
 
     func applicationWillResignActive(application: UIApplication) {
