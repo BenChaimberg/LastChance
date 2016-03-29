@@ -11,6 +11,7 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    var alarms = [Alarm]()
     var window: UIWindow?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
@@ -52,12 +53,41 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+
+        if let savedAlarms = loadAlarms() {
+            print(alarms)
+            alarms = savedAlarms
+            print(alarms)
+        }
+        let scheduledNotifications = UIApplication.sharedApplication().scheduledLocalNotifications
+        for alarm in alarms {
+            if alarm.time.compare(NSDate()) == NSComparisonResult.OrderedAscending {
+                for scheduledNotification in scheduledNotifications! {
+                    if scheduledNotification.fireDate?.timeIntervalSinceDate(alarm.time) < 60.0 {
+                        application.cancelLocalNotification(scheduledNotification)
+                    }
+                }
+                alarms.removeAtIndex(alarms.indexOf(alarm)!)
+                saveAlarms()
+                continue
+            }
+        }
     }
 
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
+    
+    func saveAlarms() {
+        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(alarms, toFile: Alarm.ArchiveURL.path!)
+        if !isSuccessfulSave {
+            print("Failed to save meals...")
+        }
+    }
+    func loadAlarms() -> [Alarm]? {
+        print("loadAlarms")
+        return NSKeyedUnarchiver.unarchiveObjectWithFile(Alarm.ArchiveURL.path!) as? [Alarm]
+    }
 
 }
 
