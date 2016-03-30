@@ -28,21 +28,18 @@ class AddAlarmViewController: UIViewController {
 
     // MARK: Navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if var _ = sender as? AddAlarmViewController {
-            alarm = Alarm(time: alarmPicker.date, location: nil)
-        }
         if saveButton === sender {
+            print("second")
             alarm = Alarm(time: alarmPicker.date, location: nil)
         }
     }
 
     override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
-        if var _ = sender as? UIAlertAction {
-            return true
-        } else {
+        if identifier == "save" {
             let ringerAlertController = UIAlertController.init(title: "Ringer Volume Check", message: "Please make sure your device is not in silent mode, headphones/speakers are unplugged, and the ringer volume is at its maximum so the alarm will be at its most effective!", preferredStyle: .Alert)
             let dismissAction = UIAlertAction.init(title: "Continue", style: .Default, handler: { (UIAlertAction) -> Void in
-                self.performSegueWithIdentifier("ringerDismiss", sender: self)
+                self.navigationController?.popToRootViewControllerAnimated(true)
+                self.performSegueWithIdentifier("ringerDismiss", sender: sender)
             })
             ringerAlertController.addAction(dismissAction)
             ringerAlertController.preferredAction = dismissAction
@@ -50,6 +47,8 @@ class AddAlarmViewController: UIViewController {
             let activeViewController = navigationController.visibleViewController!
             activeViewController.presentViewController(ringerAlertController, animated: true, completion: nil)
             return false
+        } else {
+            return true
         }
     }
 

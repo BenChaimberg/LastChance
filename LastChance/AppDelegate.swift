@@ -60,6 +60,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print(alarms)
         }
         let scheduledNotifications = UIApplication.sharedApplication().scheduledLocalNotifications
+        print(scheduledNotifications)
         for alarm in alarms {
             if alarm.time.compare(NSDate()) == NSComparisonResult.OrderedAscending {
                 for scheduledNotification in scheduledNotifications! {

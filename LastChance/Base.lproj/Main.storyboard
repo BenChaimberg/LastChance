@@ -1,36 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="5sU-wA-rM3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="bNc-OR-O0e">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Alarm View Controller-->
-        <scene sceneID="r7a-i9-uec">
-            <objects>
-                <viewController id="U7A-tw-qgW" customClass="AlarmViewController" customModule="LastChance" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Y8M-8X-9uQ"/>
-                        <viewControllerLayoutGuide type="bottom" id="ABl-85-laE"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="y3A-WG-6t4">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="Lgu-A6-p9Q">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="vAZ-7o-xtD">
-                            <connections>
-                                <segue destination="jtb-yB-PSq" kind="presentation" id="g8H-bZ-ZGI"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="NbX-De-5bX" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2258" y="249"/>
-        </scene>
         <!--Add New Alarm-->
         <scene sceneID="Ooo-GN-Mqw">
             <objects>
@@ -68,56 +43,111 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="Dbg-Lc-zeK">
                             <connections>
-                                <segue destination="L9f-Qz-cJO" kind="unwind" identifier="save" unwindAction="unwindToAlarmList:" id="fzd-hM-dZK"/>
+                                <segue destination="L9f-Qz-cJO" kind="unwind" identifier="save" unwindAction="unwindToAlarmList:" id="CPP-N1-1TL"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="alarmPicker" destination="rcx-Yb-GSv" id="C0M-tr-JkJ"/>
                         <outlet property="saveButton" destination="Dbg-Lc-zeK" id="KX8-Ko-SuT"/>
-                        <segue destination="L9f-Qz-cJO" kind="unwind" identifier="ringerDismiss" unwindAction="unwindToAlarmList:" id="g3c-AR-WUO"/>
+                        <segue destination="L9f-Qz-cJO" kind="unwind" identifier="ringerDismiss" unwindAction="unwindToAlarmList:" id="z5U-K2-Qbb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JKA-fv-mDR" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="L9f-Qz-cJO" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3676" y="249"/>
+            <point key="canvasLocation" x="4646" y="249"/>
+        </scene>
+        <!--Alarms-->
+        <scene sceneID="AzF-2E-860">
+            <objects>
+                <tableViewController id="e6t-zf-mpV" customClass="AlarmTableViewController" customModule="LastChance" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="90" sectionHeaderHeight="28" sectionFooterHeight="28" id="ZG1-VP-lVa">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="AlarmTableViewCell" rowHeight="90" id="xHp-la-JxY" customClass="AlarmTableViewCell" customModule="LastChance" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="92" width="600" height="90"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xHp-la-JxY" id="nY1-pP-G51">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="89.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rNv-E1-LTZ">
+                                            <rect key="frame" x="8" y="6" width="584" height="75"/>
+                                            <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="64"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pZW-Wo-nnH">
+                                            <rect key="frame" x="543" y="30" width="51" height="31"/>
+                                        </switch>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="pZW-Wo-nnH" firstAttribute="top" secondItem="nY1-pP-G51" secondAttribute="topMargin" constant="22" id="OeW-kR-505"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="pZW-Wo-nnH" secondAttribute="bottom" constant="20.5" id="Q8K-GU-eRk"/>
+                                        <constraint firstItem="pZW-Wo-nnH" firstAttribute="trailing" secondItem="nY1-pP-G51" secondAttribute="trailingMargin" id="tO1-wc-trG"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="switch" destination="pZW-Wo-nnH" id="IMS-Q0-FIF"/>
+                                    <outlet property="timeLabel" destination="rNv-E1-LTZ" id="R8G-iV-VjK"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="e6t-zf-mpV" id="0cp-LB-4Jp"/>
+                            <outlet property="delegate" destination="e6t-zf-mpV" id="5Ya-jz-Xxj"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Alarms" id="1MD-F7-Eev">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="QXY-7l-gaE">
+                            <connections>
+                                <segue destination="xJc-or-YTF" kind="presentation" id="axW-SW-1FB"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bpd-dX-Jnr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3078" y="249"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="DZi-ME-cOw">
+        <scene sceneID="MPb-px-wt1">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="5sU-wA-rM3" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="bNc-OR-O0e" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="89c-4q-wX7">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="gdn-FA-lAf">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="U7A-tw-qgW" kind="relationship" relationship="rootViewController" id="V3J-Kz-TXa"/>
+                        <segue destination="e6t-zf-mpV" kind="relationship" relationship="rootViewController" id="mHl-sF-rIp"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="yNh-3J-Nrx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pKt-49-hlH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1582" y="249"/>
+            <point key="canvasLocation" x="2266" y="249"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="xyY-S6-HjU">
+        <scene sceneID="Xqd-sZ-96F">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="jtb-yB-PSq" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="xJc-or-YTF" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="OaI-Dh-jI2">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="gKQ-pk-AR0">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="5u4-UO-Y6u" kind="relationship" relationship="rootViewController" id="9fZ-UP-k6f"/>
+                        <segue destination="5u4-UO-Y6u" kind="relationship" relationship="rootViewController" id="WI0-Is-ruh"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dwz-WL-Qk7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kRd-uq-bev" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2928" y="249"/>
+            <point key="canvasLocation" x="3834" y="249"/>
         </scene>
     </scenes>
 </document>
